@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Diário Digital</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body style="overflow-y: hidden;">
+
+    <script src="/static/index.js"></script>
+
+    <div class="bg"
+        style="color: #FFF; background-image: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%,
+        rgba(255,255,255,0.9) 100%),url(./static/assets/bg/bg-emoji.png); 
+        background-repeat: no-repeat; background-size: cover; background-position: center center;">
+
+        <!--Nome do Aplicativo-->
+        <div class=" container-fluid text-center"
+            style="background-color: #4C56AF; font-family: cursive; min-height: 8vh;">
+            <h1>Diário Digital</h1>
+        </div>
+
+        <!--Dia e Data-->
+        <div class="text-left mb-2"
+            style="background-color: #263088; font-family: cursive; width: 100%; min-height: 3vh;">
+            <p id="display_date">Data</p>
+        </div>
+
+        <!--Digite a Nova Entrada e Detecte a Emoção-->
+        <div class="container-fluid" style=" min-height: 25vh;">
+            <div style=" color:black; font-family: cursive; width: 100%;">
+                <textarea class="form-control" id="text" name="text_input" rows="4" maxlength="200"
+                placeholder="Como foi o seu dia?"></textarea>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-6 text-left">
+                    <button class="btn btn-lg" id="predict_button" type="submit" name="submit_b" 
+                    value="submit_p" style="color:white; background-color: #4C56AF; 
+                    font-family: cursive; ">Prever Emoção</button>
+                </div>
+
+                <div class="col-6 text-right ">
+                    <button class="btn btn-lg" id="save_button" type="submit" name="submit_b" 
+                    value="submit_s" style="color:white; 
+                    background-color: #4C56AF; font-family: cursive; ">Salvar Esta Entrada</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!--Emoção Prevista-->
+        <div class="container-fluid" id="prediction_container"
+            style="color:black; font-family: cursive; font-size:20px; min-height: 20vh;">
+            <p id="prediction" style="display: none"></p>
+            <img id="emo_img_url" src="" width="55" min-height="50" alt="" style="display: none">
+        </div>
+
+        <!--Colunas de Suas Entradas-->
+        <div class="container-fluid text-left " style="min-height: 40vh ">
+            <div class="row" style="background-color: #263088; color: #FFF; font-family: cursive; 
+            font-size: larger; min-height: 4vh "> <p>Suas Entradas :)</p>
+            </div>
+            <div class="row row-col-3" style="background-color: #4C56AF; color: #000; 
+            font-family: cursive; min-height: 35vh ">
+                {% for entry in entries %}
+                <div class="col mt-2 mb-2 ml-2 border rounded" style=" background-color: white; min-height: 33vh">
+                    <h4>{{entry["date"]}}</h4>
+                    <p>{{entry["entry"]}}</p>
+                    <img src="{{entry['emotion_url']}}" width="55" min-height="50" alt="">
+                    <p>{{entry["emotion"]}}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="row" style="background-color: #263088;min-height: 4vh ">
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
